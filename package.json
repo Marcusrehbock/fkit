@@ -8,11 +8,26 @@
 		"preview": "vite preview"
 	},
 	"devDependencies": {
+		"@skeletonlabs/skeleton": "^2.1.0",
+		"@skeletonlabs/tw-plugin": "^0.2.0",
 		"@sveltejs/adapter-auto": "^2.0.0",
 		"@sveltejs/adapter-static": "^2.0.3",
 		"@sveltejs/kit": "^1.20.4",
+		"autoprefixer": "^10.4.15",
+		"daisyui": "^3.7.4",
+		"flowbite-svelte-blocks": "^0.5.1",
+		"flowbite-svelte-icons": "^0.4.4",
+		"postcss": "^8.4.29",
 		"svelte": "^4.0.5",
+		"tailwindcss": "^3.3.3",
 		"vite": "^4.4.2"
 	},
-	"type": "module"
+	"type": "module",
+	"dependencies": {
+		"dotenv": "^16.3.1",
+		"firebase": "^10.4.0",
+		"firebase-admin": "^11.10.1",
+		"flowbite-svelte": "^0.44.15",
+		"sveltefire": "^0.4.2"
+	}
 }

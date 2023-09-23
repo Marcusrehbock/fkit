@@ -1,9 +1,15 @@
-import adapter from '@sveltejs/adapter-vercel';
- 
+import adapter from '@sveltejs/adapter-auto';
+import { vitePreprocess } from '@sveltejs/kit/vite';
+import { vercel } from '@sveltejs/adapter-vercel';
+
 export default {
   kit: {
-    adapter: adapter({
+    adapter: vercel({   
       // see the 'Deployment configuration' section below
+    
     })
-  }
+  },
+  preprocess: vitePreprocess()
+  
 };
+
