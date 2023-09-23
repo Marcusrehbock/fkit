@@ -12,7 +12,6 @@
       const provider = new GoogleAuthProvider();
       const user = await signInWithPopup(auth, provider);
       console.log(user)
-  
   }
 
 </script>
