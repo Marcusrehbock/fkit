@@ -1,5 +1,5 @@
 import adapter from '@sveltejs/adapter-auto';
-import { vitePreprocess } from '@sveltejs/kit/vite';
+//import { vitePreprocess } from '@sveltejs/kit/vite';
 
 export default {
   kit: {
@@ -7,7 +7,7 @@ export default {
       // see the 'Deployment configuration' section below
     })
   },
-  preprocess: vitePreprocess()
+  //preprocess: vitePreprocess()
   
 };
 
