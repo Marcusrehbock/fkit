@@ -1,8 +1,8 @@
 <script lang="ts">
-    import { user } from "$lib/firebase";
+    import { authStore } from "$lib/stores/auth";
 </script>
   
-{#if $user}
+{#if $authStore}
   <slot />
 {:else}
     <p class="text-error">

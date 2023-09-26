@@ -28,7 +28,6 @@
 		"dotenv": "^16.3.1",
 		"firebase": "^10.4.0",
 		"firebase-admin": "^11.10.1",
-		"flowbite-svelte": "^0.44.15",
-		"sveltefire": "^0.4.2"
+		"flowbite-svelte": "^0.44.15"
 	}
 }

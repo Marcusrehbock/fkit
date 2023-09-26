@@ -1,11 +1,23 @@
 <script>
     import Keypad from '$lib/components/Timer/Keypad.svelte'
     import Timer from '$lib/components/Timer/Timer.svelte'
+    import { authStore } from '$lib/stores/auth';
+    //import { FireOutline } from 'flowbite-svelte-icons';
+    import { auth } from '$lib/firebase';
+    import { signOut } from 'firebase/auth';
+    import Signoutbutton from '../../lib/components/Signoutbutton.svelte';
+    import AuthCheck from '../../lib/components/AuthCheck.svelte';
   
     let countdown;
+    $authStore ? console.log('Logged in') : console.log('Logged out')
+
+
   </script>
-  
+
+  <AuthCheck>
+
   <div>
+    <Signoutbutton/>
     {#if countdown}
       <Timer
         on:new={() => {
@@ -21,6 +33,7 @@
       />
     {/if}
   </div>
+</AuthCheck>
   
   <style>
       :global(*) {
@@ -53,4 +66,5 @@
       padding: 1rem;
     }
   </style>
+
   

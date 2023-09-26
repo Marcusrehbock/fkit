@@ -2,9 +2,8 @@
   import { Button, Checkbox, Label, Input } from 'flowbite-svelte';
   import { GoogleAuthProvider, createUserWithEmailAndPassword, signInWithPopup, signOut } from "firebase/auth";
   import { auth } from "$lib/firebase";
-  import { userStore } from 'sveltefire'; 
+  import { authStore } from '$lib/stores/auth';
 
-  const user = userStore(auth); 
   
 
   let email = "";
@@ -28,15 +27,13 @@
 async function signInWithGoogle() {
     const provider = new GoogleAuthProvider();
     const user = await signInWithPopup(auth, provider);
-    console.log(user)
-    window.location.href = "/timer"
   };
 
 
   </script>
   
-{#if $user}
-<h2 class="card-title">Welcome, {$user.displayName}</h2>
+{#if $authStore}
+<h2 class="card-title">Welcome </h2>
 <p class="text-center text-success">You are logged in</p>
 <button class="btn btn-warning" on:click={() => signOut(auth)}>Sign out</button>
 {:else}

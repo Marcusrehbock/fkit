@@ -3,6 +3,7 @@
     import { tweened } from 'svelte/motion';
     import { linear as easing } from 'svelte/easing';
     import { fly } from 'svelte/transition';
+    import { user } from "$lib/firebase";
   
     const dispatch = createEventDispatcher();
   
@@ -15,13 +16,28 @@
     $: h = Math.floor(count / 3600);
     $: m = Math.floor((count - h * 3600) / 60);
     $: s = count - h * 3600 - m * 60;
+
+    function storeMeditationData(duration) {
+      const timestamp = new Date();
+      if (user) {
+        firebase.firestore().collection("meditations").add({
+          userID: user.uid,
+          duration,
+          timestamp
+        });
+      }
+    }
   
     function updateTimer() {
       now = Date.now();
     }
   
     let interval = setInterval(updateTimer, 1000);
-    $: if (count === 0) clearInterval(interval);
+    $: if (count === 0) {
+      clearInterval(interval);
+      storeMeditationData(countdown);
+    }
+
   
     let isPaused;
     let isResetting;
@@ -32,6 +48,8 @@
   
     $: offset.set(Math.max(count - 1, 0) / countdown);
     $: rotation.set((Math.max(count - 1, 0) / countdown) * 360);
+
+    
   
     function handleNew() {
       clearInterval(interval);
@@ -39,6 +57,7 @@
     }
   
     function handleStart() {
+      //Audio.play();
       now = Date.now();
       end = now + count * 1000;
       interval = setInterval(updateTimer, 1000);
