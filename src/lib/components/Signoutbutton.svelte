@@ -2,7 +2,17 @@
     import { auth } from "$lib/firebase";
     import { signOut } from "firebase/auth";
     import { Button } from "flowbite-svelte";
-    //TODO Go to Home Screen after sign out
-</script>
-
-<Button on:click={() => signOut(auth)} color="dark">Sign Out</Button>
+    import { goto } from '$app/navigation';
+  
+    const handleSignOut = async () => {
+      try {
+        await signOut(auth);
+        goto('/'); // Redirect to home page
+      } catch (error) {
+        console.error("Error signing out: ", error);
+      }
+    };
+  </script>
+  
+  <Button on:click={handleSignOut} color="dark">Sign Out</Button>
+  

@@ -14,7 +14,7 @@
       <Tooltip arrow={false}>Create new item</Tooltip>
     </BottomNavItem>
   </div>
-  <BottomNavItem btnName="Profile" appBtnPosition="right">
+  <BottomNavItem href="/profile" btnName="Profile" appBtnPosition="right">
     <UserCircleSolid class="w-5 h-5 mb-1 text-gray-500 dark:text-gray-400 group-hover:text-primary-600 dark:group-hover:text-primary-500" />
     <Tooltip arrow={false}>Profile</Tooltip>
   </BottomNavItem>

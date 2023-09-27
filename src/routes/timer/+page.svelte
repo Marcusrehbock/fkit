@@ -29,8 +29,10 @@
     {/if}
   </div>
 </AuthCheck>
+<div>
+  <Bnav />
+</div>
 
-<Bnav />
   
   <style>
       :global(*) {
