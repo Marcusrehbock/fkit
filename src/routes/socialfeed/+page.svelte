@@ -1,4 +1,6 @@
 <script>
-    /** @type {import('./$types').PageData} */
-    export let data;
+  import Bnav from "../../lib/components/Bnav.svelte";
+  
 </script>
+
+<Bnav />
