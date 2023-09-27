@@ -17,7 +17,7 @@
 
   // Reactive statement for redirection
   $: if ($authStore) {
-    goto('/timer1');
+    goto('/timer');
   }
 
   async function signInWithGoogle() {

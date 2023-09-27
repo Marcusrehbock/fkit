@@ -3,7 +3,27 @@
     import { tweened } from 'svelte/motion';
     import { linear as easing } from 'svelte/easing';
     import { fly } from 'svelte/transition';
-    import { user } from "$lib/firebase";
+    import { authStore } from "$lib/stores/auth";
+    import { addDoc, collection } from "firebase/firestore";
+    import { db } from "$lib/firebase"; // your Firestore configuration
+
+    function storeMeditationData(duration) {
+      const timestamp = new Date().toISOString();;
+      const currentUser = $authStore; // Get the current user from authStore
+
+      if (currentUser && currentUser.uid) {
+        addDoc(collection(db, "meditations"), {
+          userID: currentUser.uid,
+          duration,
+          timestamp
+        }).catch(error => {
+          console.error("Error storing meditation data: ", error);
+        });
+      } else {
+        console.log("User not available. Cannot store meditation data.");
+      }
+    }
+
   
     const dispatch = createEventDispatcher();
   
@@ -16,17 +36,6 @@
     $: h = Math.floor(count / 3600);
     $: m = Math.floor((count - h * 3600) / 60);
     $: s = count - h * 3600 - m * 60;
-
-    function storeMeditationData(duration) {
-      const timestamp = new Date();
-      if (user) {
-        firebase.firestore().collection("meditations").add({
-          userID: user.uid,
-          duration,
-          timestamp
-        });
-      }
-    }
   
     function updateTimer() {
       now = Date.now();
