@@ -1,31 +1,47 @@
 <script>
     import { onMount } from 'svelte';
     import { collection, getDocs } from 'firebase/firestore';
-    import { db } from  '$lib/firebase'
+    import { db } from  '$lib/firebase';
     import { authStore } from '$lib/stores/auth';
+    import { writable } from 'svelte/store';
     import Streaks from './streaks.svelte';
   
-    let userId =  $authStore.uid;
+    let userId = $authStore.uid;
     let totalMeditations = 0;
     let averageDuration = '';
     
+    const cache = writable({});
   
     onMount(async () => {
-      const meditationsCollection = collection(db, 'Users', userId, 'Meditations');
-      const meditationsSnapshot = await getDocs(meditationsCollection);
-      totalMeditations = meditationsSnapshot.size;
+      let cachedData = $cache[userId];
+      if (cachedData) {
+        // Use cached data
+        totalMeditations = cachedData.totalMeditations;
+        averageDuration = cachedData.averageDuration;
+      } else {
+        // Fetch from Firestore
+        const meditationsCollection = collection(db, 'Users', userId, 'Meditations');
+        const meditationsSnapshot = await getDocs(meditationsCollection);
+        totalMeditations = meditationsSnapshot.size;
+    
+        let totalDuration = 0;
+        meditationsSnapshot.forEach(doc => {
+          totalDuration += doc.data().duration;
+        });
+        const avgDurationSeconds = Math.round(totalDuration / totalMeditations);
+        const mins = Math.floor(avgDurationSeconds / 60);
+        averageDuration = `${mins} mins`;
   
-      let totalDuration = 0;
-      meditationsSnapshot.forEach(doc => {
-        totalDuration += doc.data() .duration;
-      });
-      const avgDurationSeconds = Math.round(totalDuration / totalMeditations);
-      const mins = Math.floor(avgDurationSeconds / 60);
-      const secs = avgDurationSeconds % 60;
-      averageDuration = `${mins} mins`;
+        // Update cache
+        cache.update(c => {
+          c[userId] = { totalMeditations, averageDuration };
+          return c;
+        });
+      }
     });
   </script>
-
+  
+  
 
 <section class="text-gray-700 body-font">
     <div class="container px-5 py-24 mx-auto">
@@ -43,11 +59,10 @@
         </div>
         <div class="p-4 md:w-1/4 sm:w-1/2 w-full">
           <div class="border-2 border-gray-600 px-4 py-6 rounded-lg transform transition duration-500 hover:scale-110">
+            
             <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="text-indigo-500 w-12 h-12 mb-3 inline-block" viewBox="0 0 24 24">
-              <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"></path>
-              <circle cx="9" cy="7" r="4"></circle>
-              <path d="M23 21v-2a4 4 0 00-3-3.87m-4-12a4 4 0 010 7.75"></path>
-            </svg>
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+              </svg>
             <h2 class="title-font font-medium text-3xl text-gray-900">{averageDuration}</h2>
             <p class="leading-relaxed">Average Session</p>
           </div>
@@ -59,10 +74,12 @@
         <div class="p-4 md:w-1/4 sm:w-1/2 w-full">
           <div class="border-2 border-gray-600 px-4 py-6 rounded-lg transform transition duration-500 hover:scale-110">
             <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="text-indigo-500 w-12 h-12 mb-3 inline-block" viewBox="0 0 24 24">
-              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"></path>
+                <circle cx="9" cy="7" r="4"></circle>
+                <path d="M23 21v-2a4 4 0 00-3-3.87m-4-12a4 4 0 010 7.75"></path>
             </svg>
-            <h2 class="title-font font-medium text-3xl text-gray-900">46</h2>
-            <p class="leading-relaxed">Places</p>
+            <h2 class="title-font font-medium text-3xl text-gray-900">0</h2>
+            <p class="leading-relaxed">Friends</p>
           </div>
         </div>
       </div>

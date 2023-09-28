@@ -92,7 +92,7 @@
       margin: 22%;
       padding: 18%;
       border-radius: 50%;
-      background: hsl(208, 100%, 50%);
+      
       box-shadow: 0px 1px 2px hsl(208, 100%, 50%);
     }
   

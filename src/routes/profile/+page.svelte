@@ -8,11 +8,13 @@
 
 
 <AuthCheck>
-<Signoutbutton/>
+
 
 <Stats />
 
 <Bnav />
+
+<Signoutbutton/>
 
 </AuthCheck>
 

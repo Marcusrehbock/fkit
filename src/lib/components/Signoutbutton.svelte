@@ -14,5 +14,15 @@
     };
   </script>
   
+  <div class='center-button'>
   <Button on:click={handleSignOut} color="dark">Sign Out</Button>
+  </div>
+  
+  <style>
+    .center-button {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  </style>
   

@@ -43,8 +43,8 @@
   
       :global(body) {
           min-height: 100vh;
-          color: hsl(0, 0%, 98%);
-          background: hsl(240, 80%, 6%);
+          color: hsl(240, 80%, 6%);
+          background: hsl(0, 0%, 98%);
           font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
               Oxygen-Sans, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;
       }
