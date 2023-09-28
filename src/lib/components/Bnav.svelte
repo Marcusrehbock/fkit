@@ -9,7 +9,7 @@
     <Tooltip arrow={false}>Home</Tooltip>
   </BottomNavItem>
   <div class="flex items-center justify-center">
-    <BottomNavItem href="/timer" btnName="Create new item" appBtnPosition="middle" btnClass="inline-flex items-center justify-center w-10 h-10 font-medium bg-primary-600 rounded-full hover:bg-primary-700 group focus:ring-4 focus:ring-primary-300 focus:outline-none dark:focus:ring-primary-800">
+    <BottomNavItem href="/timer" btnName="New Focused Meditation" appBtnPosition="middle" btnClass="inline-flex items-center justify-center w-10 h-10 font-medium bg-primary-600 rounded-full hover:bg-primary-700 group focus:ring-4 focus:ring-primary-300 focus:outline-none dark:focus:ring-primary-800">
       <PlusSolid class="text-white" />
       <Tooltip arrow={false}>Create new item</Tooltip>
     </BottomNavItem>

@@ -5,15 +5,18 @@
     import { fly } from 'svelte/transition';
     import { authStore } from "$lib/stores/auth";
     import { addDoc, collection } from "firebase/firestore";
-    import { db } from "$lib/firebase"; // your Firestore configuration
+    import { db } from "$lib/firebase"; // your Firestore configuratio
 
     function storeMeditationData(duration) {
-      const timestamp = new Date().toISOString();;
+      const timestamp = new Date().toISOString();
       const currentUser = $authStore; // Get the current user from authStore
 
       if (currentUser && currentUser.uid) {
-        addDoc(collection(db, "meditations"), {
-          userID: currentUser.uid,
+        // Create a reference to the user's Meditations sub-collection
+        const userMeditationsCollectionRef = collection(db, "Users", currentUser.uid, "Meditations");
+
+        // Add a new document to the Meditations sub-collection
+        addDoc(userMeditationsCollectionRef, {
           duration,
           timestamp
         }).catch(error => {
@@ -23,6 +26,7 @@
         console.log("User not available. Cannot store meditation data.");
       }
     }
+
 
   
     const dispatch = createEventDispatcher();

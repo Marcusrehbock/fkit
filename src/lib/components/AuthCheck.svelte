@@ -1,12 +1,15 @@
 <script lang="ts">
     import { authStore } from "$lib/stores/auth";
+    import { Button } from "flowbite-svelte";
 </script>
   
 {#if $authStore}
   <slot />
 {:else}
-    <p class="text-error">
-        You must be signed in to view this page.
-        <a class="btn btn-primary" href="/login">Sign in</a>
-    </p>
+    <div class="flex justify-center items-center h-screen">
+        <div class="flex flex-col items-center">
+        <h1 class="text-4xl font-bold">You are not logged in</h1>
+        <Button href="/login" color="dark">Log in</Button>
+        </div>
+    </div>
 {/if}

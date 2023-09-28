@@ -33,6 +33,7 @@ async function signInWithGoogle() {
   </script>
   
 {#if $authStore}
+
 <h2 class="card-title">Welcome </h2>
 <p class="text-center text-success">You are logged in</p>
 <button class="btn btn-warning" on:click={() => signOut(auth)}>Sign out</button>
