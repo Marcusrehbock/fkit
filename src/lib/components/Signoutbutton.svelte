@@ -22,7 +22,7 @@
     .center-button {
       display: flex;
       justify-content: center;
-      align-items: center;
+      align-items: top;
     }
   </style>
   

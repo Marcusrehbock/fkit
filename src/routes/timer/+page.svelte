@@ -28,10 +28,11 @@
       />
     {/if}
   </div>
+  <div>
+    <Bnav />
+  </div>
 </AuthCheck>
-<div>
-  <Bnav />
-</div>
+
 
   
   <style>

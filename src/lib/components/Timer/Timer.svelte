@@ -70,7 +70,8 @@
     }
   
     function handleStart() {
-      //Audio.play();
+      const audio = new Audio('src/lib/components/Timer/gong.mp3');
+      audio.play();
       now = Date.now();
       end = now + count * 1000;
       interval = setInterval(updateTimer, 1000);

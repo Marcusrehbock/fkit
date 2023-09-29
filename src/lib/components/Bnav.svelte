@@ -3,7 +3,7 @@
   import { HomeSolid, WalletSolid, AdjustmentsVerticalOutline, UserCircleSolid, PlusSolid } from 'flowbite-svelte-icons';
 </script>
 
-<BottomNav position="absolute" navType="application" classInner="grid-cols-3">
+<BottomNav position="fixed" navType="application" classInner="grid-cols-3">
   <BottomNavItem href="socialfeed" btnName="Home" appBtnPosition="left">
     <HomeSolid class="w-5 h-5 mb-1 text-gray-500 dark:text-gray-400 group-hover:text-primary-600 dark:group-hover:text-primary-500" />
     <Tooltip arrow={false}>Home</Tooltip>
